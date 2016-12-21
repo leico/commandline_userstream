@@ -15,7 +15,21 @@ usage
 1. prepare library and headers
 
     ```
-    ./preparelibOAuth.sh
+    ./preparelibrary.sh
+    ```
+    
+    * if you failed, once open libCurl and libOAuth xcode project
+
+1. write your keys in key.json
+
+    ```
+    {
+        "consumer_key"    : "Your app consumer key"
+      , "consumer_secret" : "Your app consumer secret"
+      , "access_token"    : "Your access token"
+      , "token_secret"    : "Your access token secret"
+    }
+
     ```
 
 1. build on XCode
