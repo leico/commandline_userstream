@@ -1,28 +1,38 @@
 {
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "1EA5B1EAE8DAAF121305ECD8E093F760D06C456B",
   "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
 
   },
   "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
-    "FF9275D0937689C3E431F4AFF89D2F4E3C7A533D" : 9223372036854775807,
     "203AC5E17BCADB3260E0DAD2E3566E4D62D50754" : 9223372036854775807,
-    "8601E67F4FB64BCEBC94AD8912DA48EAE2F25B48" : 9223372036854775807,
+    "55A7FB660E25DAD7EFF279C9F437500B47348AC7" : 9223372036854775807,
+    "B66355A3A623C7DA96B1AC91B5D79C2FE6EE54B4" : 9223372036854775807,
     "31263E6D757B55053CAC01A14B717D6CB5CC0300" : 9223372036854775807,
-    "8C340C33C6D4C828D7EB6178408D5E4A923742E6" : 9223372036854775807,
-    "55A7FB660E25DAD7EFF279C9F437500B47348AC7" : 9223372036854775807
+    "8601E67F4FB64BCEBC94AD8912DA48EAE2F25B48" : 9223372036854775807,
+    "FF9275D0937689C3E431F4AFF89D2F4E3C7A533D" : 9223372036854775807,
+    "1EA5B1EAE8DAAF121305ECD8E093F760D06C456B" : 9223372036854775807,
+    "8C340C33C6D4C828D7EB6178408D5E4A923742E6" : 9223372036854775807
   },
   "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "0096B14D-FE75-456A-8295-928F9D4A45A6",
   "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
-    "FF9275D0937689C3E431F4AFF89D2F4E3C7A533D" : "twitter-oauth-commandline\/libOAuth\/",
     "203AC5E17BCADB3260E0DAD2E3566E4D62D50754" : "twitter-oauth-commandline\/libOAuth\/liboauth\/",
-    "8601E67F4FB64BCEBC94AD8912DA48EAE2F25B48" : "twitter-oauth-commandline\/libOAuth\/OpenSSL\/zlib\/zlib\/",
+    "55A7FB660E25DAD7EFF279C9F437500B47348AC7" : "twitter-oauth-commandline\/libOAuth\/OpenSSL\/openssl\/",
+    "B66355A3A623C7DA96B1AC91B5D79C2FE6EE54B4" : "twitter-oauth-commandline\/picojson\/",
     "31263E6D757B55053CAC01A14B717D6CB5CC0300" : "twitter-oauth-commandline\/libOAuth\/OpenSSL\/zlib\/",
-    "8C340C33C6D4C828D7EB6178408D5E4A923742E6" : "twitter-oauth-commandline\/libOAuth\/OpenSSL\/",
-    "55A7FB660E25DAD7EFF279C9F437500B47348AC7" : "twitter-oauth-commandline\/libOAuth\/OpenSSL\/openssl\/"
+    "8601E67F4FB64BCEBC94AD8912DA48EAE2F25B48" : "twitter-oauth-commandline\/libOAuth\/OpenSSL\/zlib\/zlib\/",
+    "FF9275D0937689C3E431F4AFF89D2F4E3C7A533D" : "twitter-oauth-commandline\/libOAuth\/",
+    "1EA5B1EAE8DAAF121305ECD8E093F760D06C456B" : "twitter-oauth-commandline\/",
+    "8C340C33C6D4C828D7EB6178408D5E4A923742E6" : "twitter-oauth-commandline\/libOAuth\/OpenSSL\/"
   },
   "DVTSourceControlWorkspaceBlueprintNameKey" : "twitter-oauth-commandline",
   "DVTSourceControlWorkspaceBlueprintVersion" : 204,
   "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "twitter-oauth-commandline.xcodeproj",
   "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/leico\/commandline_userstream.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "1EA5B1EAE8DAAF121305ECD8E093F760D06C456B"
+    },
     {
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/leico\/liboauth.git",
       "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
@@ -47,6 +57,11 @@
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/leico\/openssl-xcode.git",
       "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "8C340C33C6D4C828D7EB6178408D5E4A923742E6"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/kazuho\/picojson.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "B66355A3A623C7DA96B1AC91B5D79C2FE6EE54B4"
     },
     {
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "http:\/\/github.com\/leico\/liboauth-xcode.git",
