@@ -12,9 +12,7 @@
 #include <sstream>
 #include <fstream>
 #include <picojson.h>
-#include <curl/curl.h>
-#include <oauth.h>
-#include "TwitterOAuth.hpp"
+#include <TwitterOAuth.hpp>
 
 const std :: string replace(const std :: string str, const std :: string target, const std :: string repstr);
 

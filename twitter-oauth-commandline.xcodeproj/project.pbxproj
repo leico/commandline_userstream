@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		4A3EDB931E07C1A800D9C8FA /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4A3EDB921E07C1A800D9C8FA /* main.cpp */; };
-		4A5A31011E0AF3A600B10383 /* TwitterOAuth.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4A5A30FF1E0AF3A600B10383 /* TwitterOAuth.cpp */; };
+		4A61243A1E0C53BC001D4AB1 /* libTwitterOAuth.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A6124391E0C53BC001D4AB1 /* libTwitterOAuth.a */; };
 		4A755DDC1E07DC4500EB8A24 /* libcrypto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A755DD81E07DC4200EB8A24 /* libcrypto.a */; };
 		4A755DDD1E07DC4500EB8A24 /* libOAuth.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A755DD91E07DC4200EB8A24 /* libOAuth.a */; };
 		4A755DDE1E07DC4500EB8A24 /* libssl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A755DDA1E07DC4200EB8A24 /* libssl.a */; };
@@ -35,10 +35,10 @@
 		4A0291281E0A77E40016A0C0 /* key.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = key.json; sourceTree = "<group>"; };
 		4A3EDB8F1E07C1A800D9C8FA /* twitter-oauth-commandline */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "twitter-oauth-commandline"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4A3EDB921E07C1A800D9C8FA /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
-		4A5A30FF1E0AF3A600B10383 /* TwitterOAuth.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TwitterOAuth.cpp; sourceTree = "<group>"; };
-		4A5A31001E0AF3A600B10383 /* TwitterOAuth.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = TwitterOAuth.hpp; sourceTree = "<group>"; };
 		4A5D74B01E098D9300B10A3E /* Config.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
 		4A5D74B11E0991FB00B10A3E /* picojson.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = picojson.h; path = picojson/picojson.h; sourceTree = SOURCE_ROOT; };
+		4A6124391E0C53BC001D4AB1 /* libTwitterOAuth.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libTwitterOAuth.a; sourceTree = "<group>"; };
+		4A61243B1E0C541D001D4AB1 /* TwitterOAuth.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = TwitterOAuth.hpp; sourceTree = "<group>"; };
 		4A755DD81E07DC4200EB8A24 /* libcrypto.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libcrypto.a; sourceTree = "<group>"; };
 		4A755DD91E07DC4200EB8A24 /* libOAuth.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libOAuth.a; sourceTree = "<group>"; };
 		4A755DDA1E07DC4200EB8A24 /* libssl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libssl.a; sourceTree = "<group>"; };
@@ -142,6 +142,7 @@
 				4A755DFF1E083E8700EB8A24 /* LDAP.framework in Frameworks */,
 				4A755DFD1E083D8D00EB8A24 /* Foundation.framework in Frameworks */,
 				4A755DFB1E083D2F00EB8A24 /* Security.framework in Frameworks */,
+				4A61243A1E0C53BC001D4AB1 /* libTwitterOAuth.a in Frameworks */,
 				4A755DDC1E07DC4500EB8A24 /* libcrypto.a in Frameworks */,
 				4A755DDD1E07DC4500EB8A24 /* libOAuth.a in Frameworks */,
 				4A755DDE1E07DC4500EB8A24 /* libssl.a in Frameworks */,
@@ -175,8 +176,6 @@
 		4A3EDB911E07C1A800D9C8FA /* twitter-oauth-commandline */ = {
 			isa = PBXGroup;
 			children = (
-				4A5A30FF1E0AF3A600B10383 /* TwitterOAuth.cpp */,
-				4A5A31001E0AF3A600B10383 /* TwitterOAuth.hpp */,
 				4A3EDB921E07C1A800D9C8FA /* main.cpp */,
 			);
 			path = "twitter-oauth-commandline";
@@ -197,6 +196,7 @@
 		4A755DD71E07DC4200EB8A24 /* lib */ = {
 			isa = PBXGroup;
 			children = (
+				4A6124391E0C53BC001D4AB1 /* libTwitterOAuth.a */,
 				4A755DF81E083C3100EB8A24 /* libcurl.a */,
 				4A755DD81E07DC4200EB8A24 /* libcrypto.a */,
 				4A755DD91E07DC4200EB8A24 /* libOAuth.a */,
@@ -209,6 +209,7 @@
 		4A755E001E091CDF00EB8A24 /* include */ = {
 			isa = PBXGroup;
 			children = (
+				4A61243B1E0C541D001D4AB1 /* TwitterOAuth.hpp */,
 				4A5D74B11E0991FB00B10A3E /* picojson.h */,
 				4A755E021E091CDF00EB8A24 /* curl */,
 				4A755E0C1E091CDF00EB8A24 /* oauth.h */,
@@ -390,7 +391,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				4A3EDB931E07C1A800D9C8FA /* main.cpp in Sources */,
-				4A5A31011E0AF3A600B10383 /* TwitterOAuth.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -503,7 +503,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				HEADER_SEARCH_PATHS = "$(inherited)";
-				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/lib",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -512,7 +515,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				HEADER_SEARCH_PATHS = "$(inherited)";
-				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/lib",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
