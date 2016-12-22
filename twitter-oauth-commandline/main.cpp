@@ -7,24 +7,21 @@
 //
 
 #include <iostream>
-#include <fstream>
 #include <unistd.h>
 #include <string>
 #include <sstream>
-#include <map>
-#include <ctime>
-#include <algorithm>
-#include <locale>
-#include <oauth.h>
-#include <curl/curl.h>
+#include <fstream>
 #include <picojson.h>
+#include <curl/curl.h>
+#include <oauth.h>
+#include "TwitterOAuth.hpp"
 
-const std :: string gen_nonce(void);
-const std :: string curl_tostring(char* cstr);
 const std :: string replace(const std :: string str, const std :: string target, const std :: string repstr);
+
 
 size_t write_callback   (char* data,      size_t size,    size_t nmemb, void  *userdata);
 int    progress_callback(void* callcount, curl_off_t dltotal, curl_off_t dlnow, curl_off_t ultotal, curl_off_t ulnow);
+
 
 int main(int argc, const char * argv[]) {
 
@@ -71,189 +68,33 @@ int main(int argc, const char * argv[]) {
               << "access_token    : " << access_token    << "\n"
               << "token_secret    : " << token_secret    << std :: endl;
 
-
-  //curl initialization
-  curl_global_init(CURL_GLOBAL_ALL);
-  CURL *curl = curl_easy_init();
-
-  if(curl == NULL){
-    std :: cerr << "curl is NULL" << std :: endl;
-    exit(1);
-  }
-
-
-
-  //collect OAuth status
-  using OAuthtype = std :: map<std :: string, std :: string>;
-  OAuthtype OAuth_param;
-  {
-    std :: stringstream ss;
-    ss << std :: time(nullptr);
-
-    OAuth_param.insert( OAuthtype :: value_type("oauth_consumer_key", consumer_key.c_str()) );
-    OAuth_param.insert( OAuthtype :: value_type("oauth_signature_method", "HMAC-SHA1")      );
-    OAuth_param.insert( OAuthtype :: value_type("oauth_timestamp", ss.str().c_str())        );
-    OAuth_param.insert( OAuthtype :: value_type("oauth_version", "1.0")                     );
-    OAuth_param.insert( OAuthtype :: value_type("oauth_nonce", gen_nonce() .c_str())        );
-    OAuth_param.insert( OAuthtype :: value_type("oauth_token", access_token.c_str())        );
-  }
-
-
-  //contruct paramter string
-  std :: string query = [&](){
-
-    std :: stringstream ss;
-
-    for(OAuthtype :: iterator it = OAuth_param.begin() ; it != OAuth_param.end() ; ++ it){
-
-      if(it != OAuth_param.begin()) ss << '&';
-
-      ss        << curl_tostring( curl_easy_escape(curl, (it -> first) .c_str(), 0) );
-      ss << '=' << curl_tostring( curl_easy_escape(curl, (it -> second).c_str(), 0) );
-    }
-    return ss.str();
-  }();
-
-  //contruct signature base string
-  query = [&](){
-    std :: stringstream ss;
-    ss        << curl_tostring( curl_easy_escape(curl, method.c_str(), 0) );
-    ss << '&' << curl_tostring( curl_easy_escape(curl, url   .c_str(), 0) );
-    ss << '&' << curl_tostring( curl_easy_escape(curl, query .c_str(), 0) ); 
-
-    return ss.str();
-  }();
-
-
-  //getting signing key string
-  std :: string key = [&](){
-
-    std :: stringstream ss;
-    ss        << curl_tostring( curl_easy_escape(curl, consumer_secret.c_str(), 0) );
-    ss << '&' << curl_tostring( curl_easy_escape(curl, token_secret   .c_str(), 0) );
-
-    return ss.str();
-  }();
-
-  //calicurating signature and add signature parameter
-  {
-    std :: string signature = curl_tostring( oauth_sign_hmac_sha1(query.c_str(), key.c_str()) );
-    signature = curl_tostring( curl_easy_escape    (curl, signature.c_str(), 0) );
-
-    OAuth_param.insert( OAuthtype :: value_type("oauth_signature", signature) );
-  }
-
-
-  //creating Authorization header
-  std :: string header = [&](){
-    std :: stringstream ss;
-
-    for(OAuthtype :: iterator it = OAuth_param.begin() ; it != OAuth_param.end() ; ++ it){
-
-      ss << ( (it == OAuth_param.begin()) ? "Authorization: OAuth " : ", " );
-      ss << (it -> first) << '=' << '\"' << (it -> second) << '\"';
-    }
-
-    return ss.str();
-  }();
-
-  //curl setting
-  curl_easy_setopt(curl, CURLOPT_URL, url.c_str() );
-  curl_easy_setopt(curl, CURLOPT_VERBOSE, 1L);
-  curl_easy_setopt(curl, CURLOPT_USERAGENT, "testmax7");
-
-  struct curl_slist *httpheader = NULL;
-                     httpheader = curl_slist_append(httpheader, header.c_str() );
-
-  curl_easy_setopt(curl, CURLOPT_HTTPHEADER, httpheader);
-  curl_easy_setopt(curl, CURLOPT_FAILONERROR, 1);
-  curl_easy_setopt(curl, CURLOPT_ENCODING, "gzip");
-
-
-
-
   std :: string receive_data(65535, '\0');
                 receive_data.clear();
 
-  curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, write_callback);
-  curl_easy_setopt(curl, CURLOPT_WRITEDATA,     reinterpret_cast<void *>(&receive_data));
-
-
-
   int progresscall_count = 0;
 
-  curl_easy_setopt(curl, CURLOPT_NOPROGRESS,       0L);
-  curl_easy_setopt(curl, CURLOPT_XFERINFODATA,     reinterpret_cast<void *>(&progresscall_count) );
-  curl_easy_setopt(curl, CURLOPT_XFERINFOFUNCTION, progress_callback);
-
-
-  //connect twitter
-  CURLcode curlstatus = curl_easy_perform(curl);
-
-  long http_code = 0;
-  curl_easy_getinfo(curl, CURLINFO_RESPONSE_CODE, &http_code);
-
-  //output log
-  std :: cout << http_code << ":" << curl_easy_strerror( curlstatus ) << std :: endl;
-
-  //cleanup
-  curl_slist_free_all(httpheader);
-  curl_easy_cleanup(curl);
-  curl_global_cleanup();
-
-  return 0;
-}
-
-
-
-
-
-//generate 32 byte random string and base 64 encode
-const std :: string gen_nonce(void){
-
-  //twitter need 32 byte data
-  const int LETTER_COUNT = 32;
-
-  std :: stringstream ss;
-
-  //generate more than 32 letters string
-  while(ss.tellp() <= LETTER_COUNT)
-    ss << curl_tostring( oauth_gen_nonce() );
-
-  //trim 32 letters
-  std :: string str = ss.str().substr(0, LETTER_COUNT);
-
-  //and, need base 64 encording 
-  str = curl_tostring( 
-          oauth_encode_base64(
-              LETTER_COUNT
-            , reinterpret_cast<const unsigned char *>( str.c_str() ) 
-          )
-        );
-
-  //also need to remove non word(non A-Z, a-z, 0-9) charactors
-  str.erase(
-    std :: remove_if(
-        str.begin()
-      , str.end()
-      , [](char c) -> bool { return (std :: isalnum(c) == 0); }
-    )
-    , str.end()
+  TwitterOAuth twitter(
+      method
+    , url
+    , consumer_key
+    , consumer_secret
+    , access_token
+    , token_secret
+    , true
+    , "testmax7"
+    , write_callback
+    , progress_callback
+    , reinterpret_cast<void *>(&receive_data)
+    , reinterpret_cast<void *>(&progresscall_count)
   );
 
-  return str;
+  
+  std :: cout << twitter.SendRequest() << std :: endl;
+
+  return 0;
+  
 }
 
-
-
-
-
-//copy string returned and free curl function char*
-const std :: string curl_tostring(char* cstr){
-  std :: string str = cstr;
-  curl_free(cstr);    //curl function returned char*, it need to free
-  return str;
-}
 
 
 
