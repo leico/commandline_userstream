@@ -2,7 +2,7 @@ Twitter Streaming API test in command line
 ==========
 
 depend
-http://github.com/leico/liboauth-xcode
+http://github.com/leico/libTwitterOAuth
 
 usage
 -----
