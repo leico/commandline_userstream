@@ -17,8 +17,6 @@ usage
     ```
     ./preparelibrary.sh
     ```
-    
-    * if you failed, once open libCurl and libOAuth xcode project
 
 1. write your keys in key.json
 
