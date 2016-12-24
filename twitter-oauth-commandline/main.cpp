@@ -87,7 +87,16 @@ int main(int argc, const char * argv[]) {
   );
 
   
-  std :: cout << twitter.SendRequest() << std :: endl;
+  twitter.StartSendRequest();
+
+  while(twitter.CurlConnectCount()) usleep(100 * 1000);
+
+  std :: vector< std :: string > msgs;
+  twitter.CurlReadMsgs(msgs);
+
+  std :: vector< std :: string > :: iterator it = msgs.begin();
+  while(it != msgs.end()) std :: cout << *it++ << std :: endl;
+  
 
   return 0;
   
@@ -187,7 +196,7 @@ int progress_callback(void* callcount, curl_off_t dltotal, curl_off_t dlnow, cur
               << "ULnow   : " << ulnow   << '\n'
               << "count   : " << count   << std :: endl;
 
-  if(count > 100) return 1; //if return non zero, perform stopped
+  if(count > 500) return 1; //if return non zero, perform stopped
 
   return 0;
 }
