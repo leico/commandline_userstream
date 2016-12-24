@@ -19,6 +19,23 @@
 		4A755DFF1E083E8700EB8A24 /* LDAP.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A755DFE1E083E8700EB8A24 /* LDAP.framework */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		4ACDAA171E0EEE3C00C756A7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4ACDAA131E0EEE3B00C756A7 /* TwitterOAuth.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 4A5EE3A31E0C240D00BF3E35;
+			remoteInfo = TwitterOAuth;
+		};
+		4ACDAA1B1E0EEE9800C756A7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4ACDAA131E0EEE3B00C756A7 /* TwitterOAuth.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 4A5EE3A21E0C240C00BF3E35;
+			remoteInfo = TwitterOAuth;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXCopyFilesBuildPhase section */
 		4A3EDB8D1E07C1A800D9C8FA /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
@@ -132,6 +149,7 @@
 		4A755E561E091CDF00EB8A24 /* x509v3.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = x509v3.h; sourceTree = "<group>"; };
 		4A755E571E091CDF00EB8A24 /* zconf.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = zconf.h; sourceTree = "<group>"; };
 		4A755E581E091CDF00EB8A24 /* zlib.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = zlib.h; sourceTree = "<group>"; };
+		4ACDAA131E0EEE3B00C756A7 /* TwitterOAuth.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = TwitterOAuth.xcodeproj; path = TwitterOAuth/TwitterOAuth.xcodeproj; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -184,6 +202,7 @@
 		4A3EDB991E07C27700D9C8FA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				4ACDAA131E0EEE3B00C756A7 /* TwitterOAuth.xcodeproj */,
 				4A755E001E091CDF00EB8A24 /* include */,
 				4A755DFE1E083E8700EB8A24 /* LDAP.framework */,
 				4A755DFC1E083D8D00EB8A24 /* Foundation.framework */,
@@ -316,6 +335,14 @@
 			path = openssl;
 			sourceTree = "<group>";
 		};
+		4ACDAA141E0EEE3B00C756A7 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				4ACDAA181E0EEE3C00C756A7 /* libTwitterOAuth.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -323,6 +350,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 4A3EDB961E07C1A800D9C8FA /* Build configuration list for PBXNativeTarget "twitter-oauth-commandline" */;
 			buildPhases = (
+				4ACDAA1D1E0EEF5000C756A7 /* Run Script */,
 				4A3EDB8B1E07C1A800D9C8FA /* Sources */,
 				4A3EDB8C1E07C1A800D9C8FA /* Frameworks */,
 				4A3EDB8D1E07C1A800D9C8FA /* CopyFiles */,
@@ -331,6 +359,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				4ACDAA1C1E0EEE9800C756A7 /* PBXTargetDependency */,
 			);
 			name = "twitter-oauth-commandline";
 			productName = "twitter-oauth-commandline";
@@ -362,12 +391,28 @@
 			mainGroup = 4A3EDB861E07C1A800D9C8FA;
 			productRefGroup = 4A3EDB901E07C1A800D9C8FA /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 4ACDAA141E0EEE3B00C756A7 /* Products */;
+					ProjectRef = 4ACDAA131E0EEE3B00C756A7 /* TwitterOAuth.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				4A3EDB8E1E07C1A800D9C8FA /* twitter-oauth-commandline */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		4ACDAA181E0EEE3C00C756A7 /* libTwitterOAuth.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libTwitterOAuth.a;
+			remoteRef = 4ACDAA171E0EEE3C00C756A7 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXShellScriptBuildPhase section */
 		4A0291291E0A7B1D0016A0C0 /* ShellScript */ = {
@@ -381,7 +426,21 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "ln -sf ${SRCROOT}/key.json ${CONFIGURATION_BUILD_DIR}/key.json";
+			shellScript = "ln -sf ${SRCROOT}/key.json ${CONFIGURATION_BUILD_DIR}/key.json\n";
+		};
+		4ACDAA1D1E0EEF5000C756A7 /* Run Script */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Run Script";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "ln -sf ${SRCROOT}/TwitterOAuth/DerivedData/Build/Products/Release/libTwitterOAuth.a ${SRCROOT}/lib/libTwitterOAuth.a\nln -sf ${SRCROOT}/TwitterOAuth/DerivedData/Build/Products/Release/usr/local/include/TwitterOAuth.hpp ${SRCROOT}/include/TwitterOAuth.hpp";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -395,6 +454,14 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		4ACDAA1C1E0EEE9800C756A7 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = TwitterOAuth;
+			targetProxy = 4ACDAA1B1E0EEE9800C756A7 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		4A3EDB941E07C1A800D9C8FA /* Debug */ = {
