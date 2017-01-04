@@ -89,7 +89,7 @@ int main(int argc, const char * argv[]) {
   { 
     twitter.StartSendRequest();
 
-    while(twitter.CurlConnectCount()) usleep(100 * 1000);
+    while( ! twitter.CurlConnectCount()) usleep(100 * 1000);
 
     std :: vector< std :: string > msgs;
     twitter.CurlReadMsgs(msgs);
